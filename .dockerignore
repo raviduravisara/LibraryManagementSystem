@@ -1,0 +1,10 @@
+frontend/
+.git/
+.gitignore
+README.md
+DEPLOYMENT_GUIDE.md
+library.zip
+.DS_Store
+*.log
+target/
+.mvn/wrapper/maven-wrapper.jar
