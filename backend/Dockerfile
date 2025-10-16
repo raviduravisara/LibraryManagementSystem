@@ -22,7 +22,7 @@ COPY src ./src
 # Build the application
 RUN ./mvnw clean package -DskipTests
 
-# Expose port
+# Expose port (Railway will set PORT environment variable)
 EXPOSE 8080
 
 # Run the application
