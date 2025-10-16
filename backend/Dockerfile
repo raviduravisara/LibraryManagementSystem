@@ -4,11 +4,11 @@ FROM openjdk:17-jdk-slim
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml from backend directory
-COPY backend/mvnw .
-COPY backend/mvnw.cmd .
-COPY backend/.mvn .mvn
-COPY backend/pom.xml .
+# Copy Maven wrapper and pom.xml
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn .mvn
+COPY pom.xml .
 
 # Make mvnw executable
 RUN chmod +x ./mvnw
@@ -16,8 +16,8 @@ RUN chmod +x ./mvnw
 # Download dependencies
 RUN ./mvnw dependency:go-offline -B
 
-# Copy source code from backend directory
-COPY backend/src ./src
+# Copy source code
+COPY src ./src
 
 # Build the application
 RUN ./mvnw clean package -DskipTests
