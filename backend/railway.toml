@@ -1,5 +1,5 @@
 # Railway Deployment Configuration
-version: "3"
+version = "3"
 
 [build]
 builder = "nixpacks"
