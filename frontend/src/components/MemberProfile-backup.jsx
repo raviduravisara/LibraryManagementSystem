@@ -210,7 +210,7 @@ const MemberProfile = () => {
       {/* Header */}
       <header className="member-header">
         <div className="header-left">
-          <h1>NexaLibrary University Library</h1>
+          <h1>SARASAVI University Library</h1>
         </div>
         <div className="header-right">
           <span className="welcome-text">Welcome, {profileData.firstName}</span>
