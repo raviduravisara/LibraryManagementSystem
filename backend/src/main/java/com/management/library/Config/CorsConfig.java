@@ -13,7 +13,7 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
     
-    @Value("${app.cors.allowed-origins:http://localhost:5173,https://sarasavi-library-management.vercel.app,https://sarasavi-library-management-o1eofuyqz.vercel.app}")
+    @Value("${app.cors.allowed-origins:*}")
     private String allowedOrigins;
 
     @Bean
@@ -21,10 +21,15 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         
-        // Split comma-separated origins and convert to list
-        List<String> originsList = Arrays.asList(allowedOrigins.split(","));
-        System.out.println("CORS Allowed Origins: " + originsList); // Debug log
-        config.setAllowedOrigins(originsList);
+        // Handle wildcard or comma-separated origins
+        if ("*".equals(allowedOrigins)) {
+            config.addAllowedOriginPattern("*");
+            System.out.println("CORS: Allowing all origins (*)");
+        } else {
+            List<String> originsList = Arrays.asList(allowedOrigins.split(","));
+            System.out.println("CORS Allowed Origins: " + originsList);
+            config.setAllowedOrigins(originsList);
+        }
         
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

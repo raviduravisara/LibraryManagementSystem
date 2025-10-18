@@ -60,7 +60,7 @@ const Signup = () => {
     try {
       const { confirmPassword, ...userData } = formData;
       
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'https://librarymanagementsystem-production-8ae7.up.railway.app/api'}/users`, userData);
+      const response = await axios.post('/api/users', userData);
 
       if (response.data.success) {
         setSuccess('Account created successfully! Redirecting to login...');

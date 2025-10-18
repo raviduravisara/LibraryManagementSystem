@@ -26,7 +26,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'https://librarymanagementsystem-production-8ae7.up.railway.app/api'}/users/login`, {
+      const response = await axios.post('/api/users/login', {
         username: formData.username,
         password: formData.password
       });
@@ -72,7 +72,7 @@ const Login = () => {
     setError('');
     setForgotStatus('');
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'https://librarymanagementsystem-production-8ae7.up.railway.app/api'}/users/password/forgot`, { email: forgotEmail });
+      await axios.post('/api/users/password/forgot', { email: forgotEmail });
       setForgotStatus('If the email exists, a reset token has been sent to your EMAIL.');
     } catch (err) {
       if (err.response) {
@@ -97,7 +97,7 @@ const Login = () => {
     setError('');
     setForgotStatus('');
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'https://librarymanagementsystem-production-8ae7.up.railway.app/api'}/users/password/reset`, { token: resetToken, newPassword });
+      await axios.post('/api/users/password/reset', { token: resetToken, newPassword });
       setForgotStatus('Password reset successful. You can now log in.');
       setShowForgot(false);
       setResetToken('');
