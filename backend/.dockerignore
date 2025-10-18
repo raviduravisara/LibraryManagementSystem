@@ -1,7 +1,0 @@
-target/
-*.md
-.git/
-.gitignore
-README.md
-.DS_Store
-*.log
