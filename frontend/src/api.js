@@ -1,11 +1,7 @@
 // Production-ready API configuration
 const getBaseURL = () => {
-  // In production (Vercel), use the environment variable
-  if (import.meta.env.PROD) {
-    return import.meta.env.VITE_API_BASE_URL || 'https://your-railway-backend.railway.app/api';
-  }
-  // In development, use the proxy
-  return '/api';
+  // Use environment variable if available, otherwise fallback to proxy
+  return import.meta.env.VITE_API_BASE_URL || '/api';
 };
 
 const BASE = getBaseURL();
@@ -39,5 +35,3 @@ export const api = {
   receiveReservation: (id) => request(`/reservations/${id}/receive`, { method: 'POST' }),
   deleteReservation: (id) => request(`/reservations/${id}`, { method: 'DELETE' }),
 }
-
-
