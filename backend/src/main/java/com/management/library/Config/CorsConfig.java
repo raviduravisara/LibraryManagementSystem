@@ -23,6 +23,7 @@ public class CorsConfig {
         
         // Split comma-separated origins and convert to list
         List<String> originsList = Arrays.asList(allowedOrigins.split(","));
+        System.out.println("CORS Allowed Origins: " + originsList); // Debug log
         config.setAllowedOrigins(originsList);
         
         config.setAllowedHeaders(Arrays.asList("*"));
