@@ -5,13 +5,13 @@ version = "3"
 builder = "nixpacks"
 
 [deploy]
-# Let Spring pick up PORT from env via server.port=${PORT:8080}
-startCommand = "java -jar target/library-0.0.1-SNAPSHOT.jar"
+# Pass PORT environment variable to Java
+startCommand = "java -Dserver.port=${PORT} -jar target/library-0.0.1-SNAPSHOT.jar"
 
 [env]
 SPRING_PROFILES_ACTIVE = "prod"
 MONGODB_URI = "${{MONGODB_URI}}"
-PORT = "${{PORT}}"
+PORT = "8081"
 CORS_ORIGINS = "${{CORS_ORIGINS}}"
 ADMIN_USERNAME = "${{ADMIN_USERNAME}}"
 ADMIN_PASSWORD = "${{ADMIN_PASSWORD}}"
