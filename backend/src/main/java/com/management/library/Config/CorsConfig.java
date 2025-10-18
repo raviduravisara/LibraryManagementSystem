@@ -7,25 +7,30 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 public class CorsConfig {
+    
     @Value("${app.cors.allowed-origins:http://localhost:5173}")
-    private List<String> allowedOrigins;
+    private String allowedOrigins;
 
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(allowedOrigins);
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
+        
+        // Split comma-separated origins and convert to list
+        List<String> originsList = Arrays.asList(allowedOrigins.split(","));
+        config.setAllowedOrigins(originsList);
+        
+        config.setAllowedHeaders(Arrays.asList("*"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setMaxAge(3600L);
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 }
-
-
-
